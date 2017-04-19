@@ -55,3 +55,5 @@ python ../../../../HiggsAnalysis/CombinedLimit/test/diffNuisances.py  mlfit.root
 
 
 NOTE: in order to perform fits etc. on Asimov dataset add "-t -1" in the command line
+
+NOTE: if you want to analyze only one channel, you should update line 133 in HTTSM2016/bin/MorphingSM2016_WAW.cpp and place there only the channel you want to analyze. You should also update commands from {cmb,mt,tt} to {cmb, your_channel}.
