@@ -237,7 +237,7 @@ int main(int argc, char** argv) {
     // Or equivalently, specify the mass points explicitly:
     vector<string> sig_procs = {"ggH","qqH","WH","ZH"};
 //    vector<string> masses = {"110","120","125","130","140"};
-    vector<string> masses = {"120","125","130"};
+    vector<string> masses = {"110","120","125","130","140"};
 //            vector<string> masses = {"125"};
     
     using ch::syst::bin_id;
@@ -350,7 +350,7 @@ int main(int argc, char** argv) {
     
     //! [part8]
     auto bbb = ch::BinByBinFactory()
-    .SetAddThreshold(0.1)
+    .SetAddThreshold(0.03)
     .SetMergeThreshold(0.5)
     .SetFixNorm(false);
     bbb.MergeBinErrors(cb.cp().backgrounds());
