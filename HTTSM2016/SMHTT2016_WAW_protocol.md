@@ -27,7 +27,7 @@ cd $CMSSW_BASE/src/
 cmsenv
 cd CombineHarvester/HTTSM2016/
 MorphingSM2016_WAW --output_folder="YourFavoriteFolderName" --postfix="-2D" --control_region=1 --manual_rebin=false --real_data=true --mm_fit=false --ttbar_fit=false
-cd output/YourFavoriteFolderNamebl
+cd output/YourFavoriteFolderName
 combineTool.py -M T2W -i {cmb,mt,tt}/* -o workspace.root --parallel 8
 
 Calculate limits:

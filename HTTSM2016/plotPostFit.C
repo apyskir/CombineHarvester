@@ -38,7 +38,7 @@ float getLumi(){
 /////////////////////////////////////////////////////////
 TH1F *get1DHistogram(const std::string &hName, std::string selName, int iCategory, std::string channel){
 
-  TFile *file = new TFile("output/Blinded25112016/postfit_shapes.root");
+  TFile *file = new TFile("output/YourFavoriteFolderName/postfit_shapes.root");
 
   std::string dirName = "htt_"+channel+"_"+to_string(iCategory)+"_13TeV_"+selName;
   std::string name = hName;
@@ -370,7 +370,7 @@ THStack* plotStack(std::string varName, std::string channel, std::pair<int, std:
 void plotPostFit(){
   
   std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> categories;
-  std::vector<std::pair<std::string,std::string>> mt_categories = {make_pair("0jet","UnRollTauPtMassVis"),  make_pair("boosted","UnRollHiggsPtMassSV"),  make_pair("vbf","UnRollMjjMassSV"),  make_pair("0jet_W","MassTrans"),  make_pair("boosted_W","MassTrans"),  make_pair("vbf_W","MassTrans"),  make_pair("antiIso_0jet","MassVis"),  make_pair("antiIso_boosted","MassSV"),  make_pair("antiIso_vbf","MassSV")};
+  std::vector<std::pair<std::string,std::string>> mt_categories = {make_pair("0jet","UnRollTauDMMassVis"),  make_pair("boosted","UnRollHiggsPtMassSV"),  make_pair("vbf","UnRollMjjMassSV"),  make_pair("0jet_W","MassTrans"),  make_pair("boosted_W","MassTrans"),  make_pair("vbf_W","MassTrans"),  make_pair("antiIso_0jet","MassVis"),  make_pair("antiIso_boosted","MassSV"),  make_pair("antiIso_vbf","MassSV")};
   std::vector<std::pair<std::string,std::string>> tt_categories = {make_pair("0jet","MassSV"),  make_pair("boosted","UnRollHiggsPtMassSV"),  make_pair("vbf","UnRollMjjMassSV"),  make_pair("0jet_QCD","MassVis"),  make_pair("boosted_QCD","MassVis"),  make_pair("vbf_QCD","MassVis")};
   categories["mt"] = mt_categories;
   categories["tt"] = tt_categories;
