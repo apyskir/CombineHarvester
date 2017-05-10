@@ -38,7 +38,7 @@ float getLumi(){
 /////////////////////////////////////////////////////////
 TH1F *get1DHistogram(const std::string &hName, std::string selName, int iCategory, std::string channel){
 
-  TFile *file = new TFile("output/YourFavoriteFolderName/postfit_shapes.root");
+  TFile *file = new TFile("postfit_shapes.root");
 
   std::string dirName = "htt_"+channel+"_"+to_string(iCategory)+"_13TeV_"+selName;
   std::string name = hName;

@@ -50,7 +50,8 @@ combine -M ProfileLikelihood --significance cmb/125/workspace.root --expectSigna
 
 Pre- and postfit shapes:
 PostFitShapes -o postfit_shapes.root -m 125 -f mlfit.root:fit_s --postfit --sampling --print -d cmb/125/combined.txt.cmb
-root -b plotPostFit.C
+mkdir fig_png
+root -b ../../plotPostFit.C
 
 Pulls:
 python ../../../../HiggsAnalysis/CombinedLimit/test/diffNuisances.py  mlfit.root -A -a --stol 0.99 --stol 0.99 --vtol 99. --vtol2 99. -f text mlfit.root > mlfit.txt
