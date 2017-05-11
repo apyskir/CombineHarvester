@@ -209,10 +209,10 @@ int main(int argc, char** argv) {
                 
                 queue.push_back(make_pair(binid,chn+"_wjets_0jet_cr"));
                 queue.push_back(make_pair(binid+1,chn+"_wjets_boosted_cr"));
-                queue.push_back(make_pair(binid+2,chn+"_wjets_vbf_cr"));
+//                queue.push_back(make_pair(binid+2,chn+"_wjets_vbf_cr"));
                 queue.push_back(make_pair(binid+3,chn+"_antiiso_0jet_cr"));
                 queue.push_back(make_pair(binid+4,chn+"_antiiso_boosted_cr"));
-                queue.push_back(make_pair(binid+5,chn+"_antiiso_vbf_cr"));
+//                queue.push_back(make_pair(binid+5,chn+"_antiiso_vbf_cr"));
                 
                 cats[chn].insert(cats[chn].end(),queue.begin(),queue.end());
             }
@@ -257,11 +257,11 @@ int main(int argc, char** argv) {
 
     if (control_region > 0){
       cb.AddProcesses(   {"*"}, {"htt"}, {"13TeV"}, {"et"}, {"W"}, {{1, "et_0jet"},{2, "et_boosted"},{3, "et_vbf"},
-                                    {10, "et_wjets_0jet_cr"},{11, "et_wjets_boosted_cr"},{12, "et_wjets_vbf_cr"},
-                                    {13, "et_antiiso_0jet_cr"},{14, "et_antiiso_boosted_cr"},{15, "et_antiiso_vbf_cr"}}, false);
+                                    {10, "et_wjets_0jet_cr"},{11, "et_wjets_boosted_cr"},
+                                    {13, "et_antiiso_0jet_cr"},{14, "et_antiiso_boosted_cr"}}, false);
       cb.AddProcesses(   {"*"}, {"htt"}, {"13TeV"}, {"mt"}, {"W"}, {{1, "mt_0jet"},{2, "mt_boosted"},{3, "mt_vbf"},
-                                    {10, "mt_wjets_0jet_cr"},{11, "mt_wjets_boosted_cr"},{12, "mt_wjets_vbf_cr"},
-                                    {13, "mt_antiiso_0jet_cr"},{14, "mt_antiiso_boosted_cr"},{15, "mt_antiiso_vbf_cr"}}, false);
+                                    {10, "mt_wjets_0jet_cr"},{11, "mt_wjets_boosted_cr"},
+                                    {13, "mt_antiiso_0jet_cr"},{14, "mt_antiiso_boosted_cr"}}, false);
     }else if (!do_jetfakes){
       cb.AddProcesses(   {"*"}, {"htt"}, {"13TeV"}, {"et"}, {"W"}, {{1, "et_0jet"},{2, "et_boosted"},{3, "et_vbf"}}, false);
       cb.AddProcesses(   {"*"}, {"htt"}, {"13TeV"}, {"mt"}, {"W"}, {{1, "mt_0jet"},{2, "mt_boosted"},{3, "mt_vbf"}}, false);
@@ -350,8 +350,8 @@ int main(int argc, char** argv) {
     
     //! [part8]
     auto bbb = ch::BinByBinFactory()
-    .SetAddThreshold(0.03)
-    .SetMergeThreshold(0.5)
+    .SetAddThreshold(0.05)
+    .SetMergeThreshold(0.8)
     .SetFixNorm(false);
     bbb.MergeBinErrors(cb.cp().backgrounds());
     bbb.AddBinByBin(cb.cp().backgrounds(), cb);
@@ -362,7 +362,7 @@ int main(int argc, char** argv) {
     auto bbb_ctl = ch::BinByBinFactory()
     .SetPattern("CMS_$ANALYSIS_$BIN_$ERA_$PROCESS_bin_$#")
     .SetAddThreshold(0.)
-    .SetMergeThreshold(0.4)
+    .SetMergeThreshold(0.8)
     .SetFixNorm(false)  // contrary to signal region, bbb *should* change yield here
     .SetVerbosity(1);
     // Will merge but only for non W and QCD processes, to be on the safe side
@@ -402,9 +402,11 @@ int main(int argc, char** argv) {
     // Add a theory group to the bottom of the DCs for use with CH Uncertainty Breakdown
     cb.SetGroup("all", {".*"});
     cb.SetGroup("nonThySyst", {".*"});
-    cb.SetGroup("theory", {"CMS_ggH_.*|CMS_qqH_.*|CMS_scale_gg_13TeV"});
-    cb.RemoveGroup("nonThySyst", {"CMS_ggH_.*|CMS_qqH_.*|CMS_scale_gg_13TeV"});
-    cb.SetGroup("JESGroup", {"CMS_scale_j.*"});
+    string theoryUncertsString = "CMS_scale_gg_.*|CMS_qqH_QCDUnc.*|CMS_ggH_PDF.*|CMS_qqH_PDF.*|CMS_ggH_UEPS.*|CMS_qqH_UEPS.*|BR_htt_THU.*|BR_htt_PU_mq.*|BR_htt_PU_alphas.*|BR_hww_THU.*|BR_hww_PU_mq.*|BR_hww_PU_alphas.*|QCDScale_ggH.*|QCDScale_qqH.*|QCDScale_VH.*|QCDScale_VH.*|pdf_Higgs_gg.*|pdf_Higgs_qq.*|pdf_Higgs_VH.*|pdf_Higgs_VH.*|";
+    cb.SetGroup("theory", {theoryUncertsString});
+    cb.RemoveGroup("nonThySyst", {theoryUncertsString});
+    cb.SetGroup("JES", {"CMS_scale_j.*"});
+    cb.SetGroup("BinByBin", {"CMS_htt_.*_bin_.*"});
     
     
     
@@ -473,18 +475,18 @@ int main(int argc, char** argv) {
                 
                     cb.cp().channel({chn}).bin_id({10}).mass({"$MASS", "*"}).WriteDatacard(output_prefix + output_folder +"/"+chn+"/"+mmm+ "/htt_"+chn+"_10_13TeV.txt", output_prefix + output_folder +"/"+chn+ "/common/htt_input"+chn+"10.root");
                     cb.cp().channel({chn}).bin_id({11}).mass({"$MASS", "*"}).WriteDatacard(output_prefix + output_folder +"/"+chn+"/"+mmm+ "/htt_"+chn+"_11_13TeV.txt", output_prefix + output_folder +"/"+chn+ "/common/htt_input"+chn+"11.root");
-                    cb.cp().channel({chn}).bin_id({12}).mass({"$MASS", "*"}).WriteDatacard(output_prefix + output_folder +"/"+chn+"/"+mmm+ "/htt_"+chn+"_12_13TeV.txt", output_prefix + output_folder +"/"+chn+ "/common/htt_input"+chn+"12.root");
+//                    cb.cp().channel({chn}).bin_id({12}).mass({"$MASS", "*"}).WriteDatacard(output_prefix + output_folder +"/"+chn+"/"+mmm+ "/htt_"+chn+"_12_13TeV.txt", output_prefix + output_folder +"/"+chn+ "/common/htt_input"+chn+"12.root");
                     cb.cp().channel({chn}).bin_id({13}).mass({"$MASS", "*"}).WriteDatacard(output_prefix + output_folder +"/"+chn+"/"+mmm+ "/htt_"+chn+"_13_13TeV.txt", output_prefix + output_folder +"/"+chn+ "/common/htt_input"+chn+"13.root");
                     cb.cp().channel({chn}).bin_id({14}).mass({"$MASS", "*"}).WriteDatacard(output_prefix + output_folder +"/"+chn+"/"+mmm+ "/htt_"+chn+"_14_13TeV.txt", output_prefix + output_folder +"/"+chn+ "/common/htt_input"+chn+"14.root");
-                    cb.cp().channel({chn}).bin_id({15}).mass({"$MASS", "*"}).WriteDatacard(output_prefix + output_folder +"/"+chn+"/"+mmm+ "/htt_"+chn+"_15_13TeV.txt", output_prefix + output_folder +"/"+chn+ "/common/htt_input"+chn+"15.root");
-                        
+//                    cb.cp().channel({chn}).bin_id({15}).mass({"$MASS", "*"}).WriteDatacard(output_prefix + output_folder +"/"+chn+"/"+mmm+ "/htt_"+chn+"_15_13TeV.txt", output_prefix + output_folder +"/"+chn+ "/common/htt_input"+chn+"15.root");
+                    
                         
                     cb.cp().channel({chn}).bin_id({10}).mass({"$MASS", "*"}).WriteDatacard(output_prefix + output_folder +"/cmb/"+mmm+ "/htt_"+chn+"_10_13TeV.txt", output_prefix + output_folder +"/"+chn+ "/common/htt_input"+chn+"10.root");
                     cb.cp().channel({chn}).bin_id({11}).mass({"$MASS", "*"}).WriteDatacard(output_prefix + output_folder +"/cmb/"+mmm+ "/htt_"+chn+"_11_13TeV.txt", output_prefix + output_folder +"/"+chn+ "/common/htt_input"+chn+"11.root");
-                    cb.cp().channel({chn}).bin_id({12}).mass({"$MASS", "*"}).WriteDatacard(output_prefix + output_folder +"/cmb/"+mmm+ "/htt_"+chn+"_12_13TeV.txt", output_prefix + output_folder +"/"+chn+ "/common/htt_input"+chn+"12.root");
+//                    cb.cp().channel({chn}).bin_id({12}).mass({"$MASS", "*"}).WriteDatacard(output_prefix + output_folder +"/cmb/"+mmm+ "/htt_"+chn+"_12_13TeV.txt", output_prefix + output_folder +"/"+chn+ "/common/htt_input"+chn+"12.root");
                     cb.cp().channel({chn}).bin_id({13}).mass({"$MASS", "*"}).WriteDatacard(output_prefix + output_folder +"/cmb/"+mmm+ "/htt_"+chn+"_13_13TeV.txt", output_prefix + output_folder +"/"+chn+ "/common/htt_input"+chn+"13.root");
                     cb.cp().channel({chn}).bin_id({14}).mass({"$MASS", "*"}).WriteDatacard(output_prefix + output_folder +"/cmb/"+mmm+ "/htt_"+chn+"_14_13TeV.txt", output_prefix + output_folder +"/"+chn+ "/common/htt_input"+chn+"14.root");
-                    cb.cp().channel({chn}).bin_id({15}).mass({"$MASS", "*"}).WriteDatacard(output_prefix + output_folder +"/cmb/"+mmm+ "/htt_"+chn+"_15_13TeV.txt", output_prefix + output_folder +"/"+chn+ "/common/htt_input"+chn+"15.root");
+//                    cb.cp().channel({chn}).bin_id({15}).mass({"$MASS", "*"}).WriteDatacard(output_prefix + output_folder +"/cmb/"+mmm+ "/htt_"+chn+"_15_13TeV.txt", output_prefix + output_folder +"/"+chn+ "/common/htt_input"+chn+"15.root");
                     
                 } // end et mt
                 if (ch::contains({"tt"}, chn)) {
