@@ -294,7 +294,7 @@ int main(int argc, char** argv) {
     }
     
     
-    ch::AddSMRun2Systematics(cb, control_region, mm_fit, ttbar_fit);
+    ch::AddSMRun2Systematics_WAW(cb, control_region, mm_fit, ttbar_fit);
     
     
         
