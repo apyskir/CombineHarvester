@@ -1,0 +1,16 @@
+CMS_tauDMReco_1prong_$ERA
+CMS_tauDMReco_1prong1pizero_$ERA
+CMS_tauDMReco_3prong_$ERA
+CMS_scale_t_1prong_$ERA
+CMS_scale_t_1prong1pizero_$ERA
+CMS_scale_t_3prong_$ERA
+JES factorization: lines 222-312 from HttSystematics_SMRun2.cc
+JES factorization: lines 323-786 from HttSystematics_SMRun2.cc
+CMS_scale_met_clustered_$ERA
+CMS_scale_met_unclustered_$ERA
+CMS_ZLShape_$CHANNEL_1prong_$ERA
+CMS_ZLShape_$CHANNEL_1prong1pizero_$ERA
+CMS_mFakeTau_1prong_$ERA
+CMS_mFakeTau_1prong1pizero_$ERA
+TopMassTreatment_$ERA
+

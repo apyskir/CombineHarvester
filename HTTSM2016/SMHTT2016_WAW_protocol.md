@@ -1,12 +1,23 @@
 To perform exclusion limits and signal significance calculations perform following steps:
 
-Get HiggsAnalysis-CombinedLimit and CombineHarvester in a way described in Protocol_SM_Htt_2016.md. Some minor changes adapting the code to WAW analysis is in apyskir's repo. Get it from: git clone git@github.com:apyskir/CombineHarvester.git:
-
+Get HiggsAnalysis-CombinedLimit and CombineHarvester:
+export SCRAM_ARCH=slc6_amd64_gcc481 (bash) or  setnev SCRAM_ARCH slc6_amd64_gcc481 (tcsh)
+scram project CMSSW CMSSW_7_4_7
+cd CMSSW_7_4_7/src
+cmsenv
+git clone https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit.git HiggsAnalysis/CombinedLimit
+//Check the recommended tag on link above, a tag &gt;= v5.0.2 is sufficient
+cd HiggsAnalysis/CombinedLimit
+git fetch origin
+git checkout v6.3.1
+cd ../..
+git clone git@github.com:apyskir/CombineHarvester.git:
 cd CombineHarvester 
 git checkout WAW_adapt
+cd ..
+scram b -j 8
 
 You can get files from other groups: 
-Get the shapes:
 
 cd CombineHarvester/HTTSM2016
 git clone https://:@gitlab.cern.ch:8443/cms-htt/SM-PAS-2016.git shapes #(from lxplus) 
