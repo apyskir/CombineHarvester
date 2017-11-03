@@ -65,12 +65,12 @@ int main(int argc, char** argv) {
     string output_folder = "sm_run2";
     // TODO: option to pick up cards from different dirs depending on channel?
     // ^ Something like line 90?
-    string input_folder_em="USCMS/";
-    string input_folder_et="USCMS/";
-    string input_folder_mt="USCMS/";
-    string input_folder_tt="USCMS/";
-    string input_folder_mm="USCMS/";
-    string input_folder_ttbar="USCMS/";
+    string input_folder_em="WAW/";
+    string input_folder_et="WAW/";
+    string input_folder_mt="WAW/";
+    string input_folder_tt="WAW/";
+    string input_folder_mm="WAW/";
+    string input_folder_ttbar="WAW/";
     string postfix="";
     bool auto_rebin = false;
     bool manual_rebin = false;
@@ -87,12 +87,12 @@ int main(int argc, char** argv) {
     config.add_options()
     ("mass,m", po::value<string>(&mass)->default_value(mass))
     
-    ("input_folder_em", po::value<string>(&input_folder_em)->default_value("USCMS"))
-    ("input_folder_et", po::value<string>(&input_folder_et)->default_value("USCMS"))
-    ("input_folder_mt", po::value<string>(&input_folder_mt)->default_value("USCMS"))
-    ("input_folder_tt", po::value<string>(&input_folder_tt)->default_value("USCMS"))
-    ("input_folder_mm", po::value<string>(&input_folder_mm)->default_value("USCMS"))
-    ("input_folder_ttbar", po::value<string>(&input_folder_ttbar)->default_value("USCMS"))
+    ("input_folder_em", po::value<string>(&input_folder_em)->default_value("WAW"))
+    ("input_folder_et", po::value<string>(&input_folder_et)->default_value("WAW"))
+    ("input_folder_mt", po::value<string>(&input_folder_mt)->default_value("WAW"))
+    ("input_folder_tt", po::value<string>(&input_folder_tt)->default_value("WAW"))
+    ("input_folder_mm", po::value<string>(&input_folder_mm)->default_value("WAW"))
+    ("input_folder_ttbar", po::value<string>(&input_folder_ttbar)->default_value("WAW"))
     
     ("postfix", po::value<string>(&postfix)->default_value(""))
     ("auto_rebin", po::value<bool>(&auto_rebin)->default_value(false))
@@ -131,6 +131,7 @@ int main(int argc, char** argv) {
     
     
     VString chns = {"mt","et","tt","em"};
+    chns = {"mt","tt"};
  //VString chns = {"tt"};
     if (mm_fit) chns.push_back("mm");
     if (ttbar_fit) chns.push_back("ttbar");

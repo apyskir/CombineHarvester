@@ -134,14 +134,15 @@ namespace ch {
         
         
         //######################## Tau Id shape uncertainty (added March 08)
-        
+//Modified by AP for adaptation
+/*        
         cb.cp().process({"ZTT"}).channel({"et","mt"}).bin_id({1}).AddSyst(cb,
                                                             "CMS_tauDMReco_1prong_$ERA", "shape", SystMap<>::init(1.00));
         cb.cp().process({"ZTT"}).channel({"et","mt"}).bin_id({1}).AddSyst(cb,
                                                                           "CMS_tauDMReco_1prong1pizero_$ERA", "shape", SystMap<>::init(1.00));
         cb.cp().process({"ZTT"}).channel({"et","mt"}).bin_id({1}).AddSyst(cb,
                                                                           "CMS_tauDMReco_3prong_$ERA", "shape", SystMap<>::init(1.00));
-        
+*/        
         
         
         //##############################################################################
@@ -182,7 +183,8 @@ namespace ch {
 //                                             "CMS_scale_t_$CHANNEL_$ERA", "shape", SystMap<>::init(1.00));
 //        }
 
-
+//Modified by AP for adaptation
+/*
         // Decay Mode based TES Settings
         cb.cp().process(JoinStr({sig_procs, all_mc_bkgs})).channel({"et","mt","tt"}).AddSyst(cb,
                                                   "CMS_scale_t_1prong_$ERA", "shape", SystMap<>::init(1.00));
@@ -190,18 +192,20 @@ namespace ch {
                                                   "CMS_scale_t_1prong1pizero_$ERA", "shape", SystMap<>::init(1.00));
         cb.cp().process(JoinStr({sig_procs, all_mc_bkgs})).channel({"et","mt","tt"}).AddSyst(cb,
                                                   "CMS_scale_t_3prong_$ERA", "shape", SystMap<>::init(1.00));
-        
+*/        
 
         //##############################################################################
         //  jet and met energy Scale
         //##############################################################################
- 
+
+//Modified by AP for adaptation
+/* 
         // MET Systematic shapes
         cb.cp().process(JoinStr({sig_procs, all_mc_bkgs})).channel({"et","mt","tt","em"}).bin_id({1,2,3}).AddSyst(cb,
                                                   "CMS_scale_met_clustered_$ERA", "shape", SystMap<>::init(1.00));
         cb.cp().process(JoinStr({sig_procs, all_mc_bkgs})).channel({"et","mt","tt","em"}).bin_id({1,2,3}).AddSyst(cb,
                                                   "CMS_scale_met_unclustered_$ERA", "shape", SystMap<>::init(1.00));
-        
+*/        
         
         // Standard JES, factorized 27 JES implementation below
         // only use 1 at a time.
@@ -292,6 +296,8 @@ namespace ch {
          
          
          }*/
+//Modified by AP for adaptation
+/* 
         for (string uncert:uncertNames){
             
             cb.cp().process(JoinStr({sig_procs, all_mc_bkgs})).channel({"et"}).bin_id({10,11,14}).AddSyst(cb,
@@ -306,11 +312,13 @@ namespace ch {
             cb.cp().process(JoinStr({sig_procs, all_mc_bkgs})).channel({"tt"}).bin_id({10,11,12}).AddSyst(cb,
                                                                                                  "CMS_scale_j_"+uncert+"_$ERA", "shape", SystMap<>::init(1.00));
         }
+*/        
         
         
         
         
-        
+//Modified by AP for adaptation
+/* 
         //JES for tt
         cb.cp().process({"WH125"}).channel({"tt"}).bin_id({3}).AddSyst(cb,"CMS_scale_j_AbsoluteMPFBias_$ERA", "lnN", SystMap<>::init(1.00590874911));
         cb.cp().process({"WH125"}).channel({"tt"}).bin_id({3}).AddSyst(cb,"CMS_scale_j_AbsoluteScale_$ERA", "lnN", SystMap<>::init(1.00590874911));
@@ -534,7 +542,9 @@ namespace ch {
         cb.cp().process({"ZJ"}).channel({"tt"}).bin_id({2}).AddSyst(cb,"CMS_scale_j_RelativePtHF_$ERA", "lnN", SystMap<>::init(1.00725082062));
         cb.cp().process({"ZJ"}).channel({"tt"}).bin_id({2}).AddSyst(cb,"CMS_scale_j_SinglePionECAL_$ERA", "lnN", SystMap<>::init(0.995180710617));
         cb.cp().process({"ZJ"}).channel({"tt"}).bin_id({2}).AddSyst(cb,"CMS_scale_j_SinglePionHCAL_$ERA", "lnN", SystMap<>::init(0.995180710617));
-        
+*/        
+//Modified by AP for adaptation
+/* 
         //JES for mt
         cb.cp().process({"WH125"}).channel({"mt"}).bin_id({3}).AddSyst(cb,"CMS_scale_j_FlavorQCD_$ERA", "lnN", SystMap<>::init(1.00875543073));
         cb.cp().process({"WH125"}).channel({"mt"}).bin_id({3}).AddSyst(cb,"CMS_scale_j_PileUpPtEC2_$ERA", "lnN", SystMap<>::init(1.00340771995));
@@ -776,7 +786,7 @@ namespace ch {
         cb.cp().process({"ZJ"}).channel({"mt"}).bin_id({2}).AddSyst(cb,"CMS_scale_j_RelativePtEC1_$ERA", "lnN", SystMap<>::init(1.00411142219));
         cb.cp().process({"ZJ"}).channel({"mt"}).bin_id({2}).AddSyst(cb,"CMS_scale_j_RelativePtEC2_$ERA", "shape", SystMap<>::init(1.00));
         cb.cp().process({"ZJ"}).channel({"mt"}).bin_id({2}).AddSyst(cb,"CMS_scale_j_RelativePtHF_$ERA", "shape", SystMap<>::init(1.00));
-
+*/
 
 
         
@@ -1350,12 +1360,14 @@ namespace ch {
         
         if (control_region > 0) {
             // Add to all CRs, don't include QCD or WJets in et/mt which have CRs, or QCD in tt
-            
+        
+//Modified by AP for adaptation
+/*     
             cb.cp().process(all_mc_bkgs).channel({"et","mt"}).bin_id({10, 11, 12, 13, 14, 15}).AddSyst(cb,
                                                             "CMS_scale_met_clustered_$ERA", "shape", SystMap<>::init(1.00));
             cb.cp().process(all_mc_bkgs).channel({"et","mt"}).bin_id({10, 11, 12, 13, 14, 15}).AddSyst(cb,
                                                             "CMS_scale_met_unclustered_$ERA", "shape", SystMap<>::init(1.00));
-            
+*/            
 //            cb.cp().AddSyst(cb,
 //                            "CMS_htt_scale_met_$ERA", "lnN", SystMap<channel, bin_id, process>::init
 //                            ({"et", "mt"}, {10, 11, 12, 13, 14, 15}, JoinStr({all_mc_bkgs_no_W}), 1.01));
@@ -1467,11 +1479,13 @@ namespace ch {
         // ZL shape  and electron/muon  to tau fake only in  mt and et channels (updated March 22)
         //##############################################################################
         
+//Modified by AP for adaptation
+/*     
         cb.cp().process( {"ZL"}).channel({"mt","et"}).AddSyst(cb,
                                                          "CMS_ZLShape_$CHANNEL_1prong_$ERA", "shape", SystMap<>::init(1.00));
         cb.cp().process( {"ZL"}).channel({"mt","et"}).AddSyst(cb,
                                                          "CMS_ZLShape_$CHANNEL_1prong1pizero_$ERA", "shape", SystMap<>::init(1.00));
-        
+*/        
         
         
         
@@ -1483,7 +1497,9 @@ namespace ch {
 //        cb.cp().process({"ZL"}).channel({"et"}).AddSyst(cb,
 //                                                        "CMS_htt_eFakeTau_13TeV", "lnN", SystMap<>::init(1.12));
         
-        
+         
+//Modified by AP for adaptation
+/*     
         cb.cp().process( {"ZL"}).channel({"mt"}).bin_id({1,2,3}).AddSyst(cb,
                                                                      "CMS_mFakeTau_1prong_$ERA", "shape", SystMap<>::init(1.00));
         cb.cp().process( {"ZL"}).channel({"mt"}).bin_id({1,2,3}).AddSyst(cb,
@@ -1492,7 +1508,7 @@ namespace ch {
                                                                      "CMS_eFakeTau_1prong_$ERA", "shape", SystMap<>::init(1.00));
         cb.cp().process( {"ZL"}).channel({"et"}).bin_id({1,2,3}).AddSyst(cb,
                                                                      "CMS_eFakeTau_1prong1pizero_$ERA", "shape", SystMap<>::init(1.00));
-        
+*/        
 //        
 //        cb.cp().process( {"ZL"}).channel({"mt"}).bin_id({1}).AddSyst(cb,
 //                                                                        "CMS_ZLShape_mFakeTau_0jet_1prong_$ERA", "shape", SystMap<>::init(1.00));
@@ -1711,10 +1727,12 @@ namespace ch {
         
         
         
+//Modified by AP for adaptation
+/*     
         //   Additonal uncertainties applied to the paper i.e. top mass 
         cb.cp().process( {"ggH"}).channel({"et","mt","em","tt"}).AddSyst(cb,
                                                                          "TopMassTreatment_$ERA", "shape", SystMap<>::init(1.00));
-        
+*/        
         
         cb.cp().AddSyst(cb, "CMS_ggH_STXSmig01", "lnN", SystMap<channel, bin_id, process>::init
                         ({"em"},{1},{"ggH"}, 0.959)
